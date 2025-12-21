@@ -274,14 +274,14 @@ export default function TemplateBrowserPage() {
                   </div>
                   
                   {/* Coming Soon badge */}
-                  {template.comingSoon && (
+                  {(template as any).comingSoon && (
                     <div className="absolute top-3 right-3 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full text-xs font-medium">
                       Coming Soon
                     </div>
                   )}
 
                   {/* Hover overlay */}
-                  {!template.comingSoon && (
+                  {!(template as any).comingSoon && (
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       <Link
                         href={`/templates/${template.id}`}
@@ -357,7 +357,7 @@ export default function TemplateBrowserPage() {
                       {template.difficulty}
                     </span>
 
-                    {!template.comingSoon && (
+                    {!(template as any).comingSoon && (
                       <Link
                         href={`/templates/${template.id}`}
                         className="text-purple-400 hover:text-purple-300 text-sm font-medium"
