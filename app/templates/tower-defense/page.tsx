@@ -356,13 +356,14 @@ export default function TowerDefenseTemplate() {
         });
 
         // Shoot
-        if (target && now - tower.lastShot >= towerType.fireRate) {
+        if (target !== null && now - tower.lastShot >= towerType.fireRate) {
           tower.lastShot = now;
+          const currentTarget = target as Enemy;
           state.projectiles.push({
             id: state.nextId++,
             x: centerX,
             y: centerY,
-            targetId: target.id,
+            targetId: currentTarget.id,
             damage: towerType.damage * tower.level,
             speed: 8,
             splash: tower.type === 'splash',
