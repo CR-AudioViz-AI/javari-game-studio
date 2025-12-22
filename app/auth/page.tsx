@@ -91,7 +91,7 @@ export default function AuthPage() {
                 rotate: 0
               }}
               animate={{ 
-                y: [null, '-10%', null],
+                y: ['0%', '-10%', '0%'],
                 rotate: [0, 10, -10, 0]
               }}
               transition={{ 
