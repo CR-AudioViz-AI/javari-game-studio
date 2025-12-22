@@ -88,7 +88,14 @@ const MY_GAMES = [
   },
 ];
 
-const RECENT_ACTIVITY = [
+const RECENT_ACTIVITY: Array<{
+  type: 'play' | 'revenue' | 'like' | 'follower' | 'review';
+  game?: string;
+  count?: number;
+  amount?: number;
+  rating?: number;
+  time: string;
+}> = [
   { type: 'play', game: 'Cosmic Runner', count: 1250, time: '2 hours ago' },
   { type: 'revenue', amount: 12.50, time: '3 hours ago' },
   { type: 'like', game: 'Gem Quest Saga', count: 45, time: '5 hours ago' },
@@ -333,11 +340,11 @@ export default function DashboardPage() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm">
-                      {activity.type === 'play' && `${formatNumber(activity.count)} new plays on ${activity.game}`}
-                      {activity.type === 'revenue' && `Earned ${formatCurrency(activity.amount)}`}
-                      {activity.type === 'like' && `${activity.count} new likes on ${activity.game}`}
-                      {activity.type === 'follower' && `${activity.count} new followers`}
-                      {activity.type === 'review' && `New ${activity.rating}★ review on ${activity.game}`}
+                      {activity.type === 'play' && `${formatNumber(activity.count || 0)} new plays on ${activity.game}`}
+                      {activity.type === 'revenue' && `Earned ${formatCurrency(activity.amount || 0)}`}
+                      {activity.type === 'like' && `${activity.count || 0} new likes on ${activity.game}`}
+                      {activity.type === 'follower' && `${activity.count || 0} new followers`}
+                      {activity.type === 'review' && `New ${activity.rating || 0}★ review on ${activity.game}`}
                     </p>
                     <p className="text-xs text-gray-500">{activity.time}</p>
                   </div>
