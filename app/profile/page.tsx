@@ -122,7 +122,7 @@ export default function ProfilePage() {
               scale: Math.random() * 0.5 + 0.5
             }}
             animate={{ 
-              y: [null, '-20%'],
+              y: ['0%', '-20%'],
               opacity: [0.3, 0.8, 0.3]
             }}
             transition={{ 
