@@ -32,10 +32,10 @@ export const ECOSYSTEM_CONFIG = {
   
   // Credit packages available for purchase
   creditPackages: [
-    { id: 'starter', name: 'Starter', credits: 50, price: 4.99, popular: false },
-    { id: 'creator', name: 'Creator', credits: 150, price: 12.99, popular: true },
-    { id: 'studio', name: 'Studio', credits: 500, price: 39.99, popular: false },
-    { id: 'enterprise', name: 'Enterprise', credits: 2000, price: 149.99, popular: false },
+    { id: 'starter', name: 'Starter', credits: 50, price: 4.99, bonus: 0, popular: false },
+    { id: 'creator', name: 'Creator', credits: 150, price: 12.99, bonus: 25, popular: true },
+    { id: 'studio', name: 'Studio', credits: 500, price: 39.99, bonus: 100, popular: false },
+    { id: 'enterprise', name: 'Enterprise', credits: 2000, price: 149.99, bonus: 500, popular: false },
   ],
   
   // Game creation costs
