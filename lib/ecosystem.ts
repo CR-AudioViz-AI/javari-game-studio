@@ -23,7 +23,7 @@ export const supabaseAdmin = supabaseServiceKey
   : null;
 
 // =============================================================================
-// ECOSYSTEM CONFIG - Required for credits, payments, cross-sell
+// ECOSYSTEM CONFIG - Required for credits, payments, cross-sell, support
 // =============================================================================
 
 export const ECOSYSTEM_CONFIG = {
@@ -48,11 +48,33 @@ export const ECOSYSTEM_CONFIG = {
     playPremiumGame: 2,
   },
   
-  // Related apps for cross-selling
+  // CR AudioViz AI Product Ecosystem (for cross-selling)
+  products: [
+    { id: 'javari', name: 'Javari AI', description: 'Your AI Assistant', url: 'https://javariai.com', icon: '🤖', color: 'from-purple-500 to-indigo-600' },
+    { id: 'scrapbook', name: 'Scrapbook', description: 'Digital Memories', url: 'https://crav-scrapbook.vercel.app', icon: '📖', color: 'from-pink-500 to-rose-600' },
+    { id: 'logo-studio', name: 'Logo Studio', description: 'AI Logo Design', url: 'https://crav-logo-studio.vercel.app', icon: '🎨', color: 'from-orange-500 to-amber-600' },
+    { id: 'music-builder', name: 'Music Builder', description: 'Create Beats', url: 'https://crav-music-builder.vercel.app', icon: '🎵', color: 'from-green-500 to-emerald-600' },
+    { id: 'ebook-creator', name: 'eBook Creator', description: 'Publish Stories', url: 'https://crav-ebook-creator.vercel.app', icon: '📚', color: 'from-blue-500 to-cyan-600' },
+    { id: 'market-oracle', name: 'Market Oracle', description: 'AI Trading Insights', url: 'https://crav-market-oracle.vercel.app', icon: '📈', color: 'from-emerald-500 to-teal-600' },
+    { id: 'cardverse', name: 'CardVerse', description: 'Trading Cards', url: 'https://cravcards.com', icon: '🃏', color: 'from-violet-500 to-purple-600' },
+    { id: 'barrels', name: 'BarrelVerse', description: 'Spirits Discovery', url: 'https://cravbarrels.com', icon: '🥃', color: 'from-amber-500 to-orange-600' },
+  ],
+  
+  // Related apps for cross-selling (legacy)
   relatedApps: [
     { id: 'logo-studio', name: 'Logo Studio', url: 'https://crav-logo-studio.vercel.app', icon: '🎨' },
     { id: 'scrapbook', name: 'Scrapbook', url: 'https://crav-scrapbook.vercel.app', icon: '📖' },
     { id: 'music-builder', name: 'Music Builder', url: 'https://crav-music-builder.vercel.app', icon: '🎵' },
+  ],
+  
+  // Support categories
+  supportCategories: [
+    { id: 'bug', name: 'Report a Bug', description: 'Something not working correctly?', icon: '🐛' },
+    { id: 'feature', name: 'Feature Request', description: 'Have an idea for improvement?', icon: '💡' },
+    { id: 'help', name: 'Need Help', description: 'Questions about using the app?', icon: '❓' },
+    { id: 'billing', name: 'Billing Issue', description: 'Payment or subscription questions?', icon: '💳' },
+    { id: 'account', name: 'Account Issue', description: 'Login or account problems?', icon: '👤' },
+    { id: 'other', name: 'Other', description: 'Something else on your mind?', icon: '📝' },
   ],
   
   // Support contact
@@ -99,7 +121,6 @@ export async function deductCredits(
     return { success: false, error: 'Server configuration error' };
   }
 
-  // Check current balance
   const { data: profile } = await supabaseAdmin
     .from('profiles')
     .select('credits_balance')
@@ -116,7 +137,6 @@ export async function deductCredits(
 
   const newBalance = profile.credits_balance - amount;
 
-  // Update balance
   await supabaseAdmin
     .from('profiles')
     .update({ 
@@ -125,7 +145,6 @@ export async function deductCredits(
     })
     .eq('id', userId);
 
-  // Log transaction
   await supabaseAdmin
     .from('credit_transactions')
     .insert({
@@ -138,7 +157,6 @@ export async function deductCredits(
       metadata,
     });
 
-  // Log activity
   await logActivity(userId, 'credits_spent', {
     amount,
     operation,
@@ -237,7 +255,6 @@ export async function logActivity(
     });
 }
 
-// Activity types for Game Studio
 export const ACTIVITY_TYPES = {
   GAME_CREATED: 'game_created',
   GAME_PUBLISHED: 'game_published',
@@ -361,15 +378,12 @@ export async function recordGamePlay(
 ): Promise<void> {
   if (!supabaseAdmin) return;
 
-  // Increment play count
   await supabaseAdmin.rpc('increment_play_count', { game_id: gameId });
 
-  // If premium game, record revenue
   if (creditCost > 0) {
-    const creatorShare = Math.floor(creditCost * 0.7); // 70% to creator
-    const platformShare = creditCost - creatorShare;   // 30% to platform
+    const creatorShare = Math.floor(creditCost * 0.7);
+    const platformShare = creditCost - creatorShare;
 
-    // Add credits to creator
     const { data: creator } = await supabaseAdmin
       .from('profiles')
       .select('credits_balance')
@@ -394,7 +408,6 @@ export async function recordGamePlay(
         });
     }
 
-    // Log revenue activity
     await logActivity(creatorId, ACTIVITY_TYPES.REVENUE_EARNED, {
       game_id: gameId,
       player_id: playerId,
@@ -500,7 +513,7 @@ export async function sendNotification(
 }
 
 // =============================================================================
-// DISCORD WEBHOOK (for team alerts)
+// DISCORD WEBHOOK
 // =============================================================================
 
 export async function sendDiscordAlert(embed: {
