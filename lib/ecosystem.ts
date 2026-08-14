@@ -51,20 +51,20 @@ export const ECOSYSTEM_CONFIG = {
   // CR AudioViz AI Product Ecosystem (for cross-selling)
   products: [
     { id: 'javari', name: 'Javari AI', desc: 'Your AI Assistant', url: 'https://javariai.com', icon: '🤖', color: 'from-purple-500 to-indigo-600' },
-    { id: 'scrapbook', name: 'Scrapbook', desc: 'Digital Memories', url: 'https://crav-scrapbook.vercel.app', icon: '📖', color: 'from-pink-500 to-rose-600' },
-    { id: 'logo-studio', name: 'Logo Studio', desc: 'AI Logo Design', url: 'https://crav-logo-studio.vercel.app', icon: '🎨', color: 'from-orange-500 to-amber-600' },
-    { id: 'music-builder', name: 'Music Builder', desc: 'Create Beats', url: 'https://crav-music-builder.vercel.app', icon: '🎵', color: 'from-green-500 to-emerald-600' },
-    { id: 'ebook-creator', name: 'eBook Creator', desc: 'Publish Stories', url: 'https://crav-ebook-creator.vercel.app', icon: '📚', color: 'from-blue-500 to-cyan-600' },
-    { id: 'market-oracle', name: 'Market Oracle', desc: 'AI Trading Insights', url: 'https://crav-market-oracle.vercel.app', icon: '📈', color: 'from-emerald-500 to-teal-600' },
-    { id: 'cardverse', name: 'CardVerse', desc: 'Trading Cards', url: 'https://cravcards.com', icon: '🃏', color: 'from-violet-500 to-purple-600' },
-    { id: 'barrels', name: 'BarrelVerse', desc: 'Spirits Discovery', url: 'https://cravbarrels.com', icon: '🥃', color: 'from-amber-500 to-orange-600' },
+    { id: 'scrapbook', name: 'Scrapbook', desc: 'Digital Memories', url: 'https://javari-scrapbook.vercel.app', icon: '📖', color: 'from-pink-500 to-rose-600' },
+    { id: 'logo-studio', name: 'Logo Studio', desc: 'AI Logo Design', url: 'https://javarilogo.com/brand', icon: '🎨', color: 'from-orange-500 to-amber-600' },
+    { id: 'music-builder', name: 'Music Builder', desc: 'Create Beats', url: 'https://javari-music-builder.vercel.app', icon: '🎵', color: 'from-green-500 to-emerald-600' },
+    { id: 'ebook-creator', name: 'eBook Creator', desc: 'Publish Stories', url: 'https://craudiovizai.com/apps/ebook-creator', icon: '📚', color: 'from-blue-500 to-cyan-600' },
+    { id: 'market-oracle', name: 'Market Oracle', desc: 'AI Trading Insights', url: 'https://craudiovizai.com/apps/market-oracle', icon: '📈', color: 'from-emerald-500 to-teal-600' },
+    { id: 'cardverse', name: 'CardVerse', desc: 'Trading Cards', url: 'https://javaricards.com', icon: '🃏', color: 'from-violet-500 to-purple-600' },
+    { id: 'barrels', name: 'BarrelVerse', desc: 'Spirits Discovery', url: 'https://javarispirits.com', icon: '🥃', color: 'from-amber-500 to-orange-600' },
   ],
   
   // Related apps for cross-selling (legacy)
   relatedApps: [
-    { id: 'logo-studio', name: 'Logo Studio', url: 'https://crav-logo-studio.vercel.app', icon: '🎨' },
-    { id: 'scrapbook', name: 'Scrapbook', url: 'https://crav-scrapbook.vercel.app', icon: '📖' },
-    { id: 'music-builder', name: 'Music Builder', url: 'https://crav-music-builder.vercel.app', icon: '🎵' },
+    { id: 'logo-studio', name: 'Logo Studio', url: 'https://javarilogo.com/brand', icon: '🎨' },
+    { id: 'scrapbook', name: 'Scrapbook', url: 'https://javari-scrapbook.vercel.app', icon: '📖' },
+    { id: 'music-builder', name: 'Music Builder', url: 'https://javari-music-builder.vercel.app', icon: '🎵' },
   ],
   
   // Support categories
