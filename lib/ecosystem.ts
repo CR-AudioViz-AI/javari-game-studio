@@ -6,20 +6,21 @@
 // =============================================================================
 
 import { createClient } from '@supabase/supabase-js';
+import { secretKey, publishableKey, supabaseUrl } from "@craudioviz/platform-sdk";
 
 // =============================================================================
 // SUPABASE CLIENT
 // =============================================================================
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_URL = supabaseUrl();
+const supabaseAnonKey = publishableKey();
+const supabaseServiceKey = secretKey();
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(SUPABASE_URL, supabaseAnonKey);
 
 // Admin client for server-side operations
 export const supabaseAdmin = supabaseServiceKey 
-  ? createClient(supabaseUrl, supabaseServiceKey)
+  ? createClient(SUPABASE_URL, supabaseServiceKey)
   : null;
 
 // =============================================================================
