@@ -28,7 +28,8 @@
     "zustand": "^4.4.7",
     "zod": "^3.22.4",
     "uuid": "^9.0.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "@craudioviz/platform-sdk": "git+https://github.com/CR-AudioViz-AI/platform-sdk.git"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
