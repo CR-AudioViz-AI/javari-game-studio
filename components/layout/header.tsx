@@ -104,12 +104,12 @@ export function Header() {
               </>
             ) : (
               <>
-                <Link
-                  href="/login"
+                <a
+                  href="https://craudiovizai.com/auth/login"
                   className="hidden sm:block text-gray-300 hover:text-white transition-colors"
                 >
                   Sign In
-                </Link>
+                </a>
                 <Link
                   href="/create/chat"
                   className="px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 rounded-lg font-medium transition-all"
