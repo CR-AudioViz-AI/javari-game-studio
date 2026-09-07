@@ -8,11 +8,41 @@ const supabase = createClient(
 );
 
 // GET /api/credits - Get user's credit balance
+
+/**
+ * 2026-09-11: the caller's identity comes from their token, never from a header.
+ *
+ * Both handlers read x-user-id from the request with the comment "Set by
+ * middleware". THERE IS NO MIDDLEWARE IN THIS REPOSITORY. The header came
+ * straight from the caller, so anyone could read or spend any account's credits
+ * by setting one line in a request.
+ *
+ * The comment is what makes this dangerous rather than obvious. A reviewer
+ * checking whether identity was handled saw a plausible explanation and moved
+ * on - the same shape as the ownership filter that said "verify ownership" and
+ * applied it only when a parameter happened to be present.
+ *
+ * Found by the route-auth guard failing this repository's own build, which is
+ * the guard doing exactly what it exists for.
+ */
+async function callerId(request: NextRequest): Promise<string | null> {
+  const header = request.headers.get('authorization') ?? '';
+  const token = header.startsWith('Bearer ') ? header.slice(7).trim() : null;
+  if (!token) return null;
+  try {
+    const { data, error } = await supabase.auth.getUser(token);
+    if (error || !data?.user) return null;
+    return data.user.id as string;
+  } catch {
+    return null;
+  }
+}
+
 export async function GET(request: NextRequest) {
   try {
     // Get user from auth header or session
     const authHeader = request.headers.get('authorization');
-    const userId = request.headers.get('x-user-id'); // Set by middleware
+    const userId = await callerId(request);
 
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -39,7 +69,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const { amount, description, referenceId } = await request.json();
-    const userId = request.headers.get('x-user-id');
+    const userId = await callerId(request);
 
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
