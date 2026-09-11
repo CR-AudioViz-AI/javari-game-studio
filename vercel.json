@@ -4,7 +4,7 @@
     "autoAlias": false
   },
   "framework": "nextjs",
-  "buildCommand": "npm run build",
+  "buildCommand": "node scripts/check-sdk-install.mjs && npm run build",
   "installCommand": "npm install",
   "outputDirectory": ".next"
 }
